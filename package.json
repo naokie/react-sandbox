@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "php server.php",
-    "build": "browserify -t reactify public/scripts/tutorial2.js -o public/scripts/bundle.js"
+    "build": "browserify -t [ reactify --harmony ] public/scripts/tutorial2.js -o public/scripts/bundle.js"
   },
   "dependencies": {
     "body-parser": "^1.4.3",
@@ -14,9 +14,7 @@
   },
   "browserify": {
     "transform": [
-      [
-        "reactify"
-      ]
+      [ "reactify", { "harmony": true } ]
     ]
   },
   "devDependencies": {

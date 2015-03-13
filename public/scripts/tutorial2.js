@@ -13,7 +13,7 @@ marked.setOptions({
 });
 
 var Comment = React.createClass({
-  render: function() {
+  render() {
     var rawMarkup = marked(this.props.children.toString());
     return (
       <div className="comment">
@@ -27,8 +27,8 @@ var Comment = React.createClass({
 });
 
 var CommentList = React.createClass({
-  render: function() {
-    var commentNodes = this.props.data.map(function(comment) {
+  render() {
+    var commentNodes = this.props.data.map((comment) => {
       return (
         <Comment author={comment.author}>
           {comment.text}
@@ -56,7 +56,7 @@ var CommentForm = React.createClass({
     React.findDOMNode(this.refs.text).value = '';
     return;
   },
-  render: function() {
+  render() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
         <input type="text" placeholder="Your name..." ref="author" />
@@ -68,16 +68,16 @@ var CommentForm = React.createClass({
 });
 
 var CommentBox = React.createClass({
-  loadCommentsFromServer: function() {
+  loadCommentsFromServer() {
     $.ajax({
       url: this.props.url,
       dataType: 'json',
-      success: function(data) {
+      success: (data) => {
         this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
+      },
+      error: (xhr, status, err) => {
         console.error(this.props.url, status, err.toString());
-      }.bind(this)
+      }
     });
   },
   handleCommentSubmit: function(comment) {
@@ -89,22 +89,22 @@ var CommentBox = React.createClass({
       dataType: 'json',
       type: 'POST',
       data: comment,
-      success: function(data) {
+      success: (data) => {
         this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
+      },
+      error: (xhr, status, err) => {
         console.error(this.props.url, status, err.toString());
-      }.bind(this)
+      }
     });
   },
-  getInitialState: function() {
+  getInitialState() {
     return {data: []};
   },
-  componentDidMount: function() {
+  componentDidMount() {
     this.loadCommentsFromServer();
     setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
-  render: function() {
+  render() {
     return (
       <div className="commentBox">
         <h1>Comments</h1>
