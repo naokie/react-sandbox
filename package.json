@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "php server.php",
-    "build": "browserify -t [ reactify --harmony ] public/scripts/tutorial2.js -o public/scripts/bundle.js"
+    "watch": "watchify public/scripts/tutorial2.js -o public/scripts/bundle.js -v",
+    "build": "browserify -t babelify public/scripts/tutorial2.js -o public/scripts/bundle.js",
+    "start": "php server.php"
   },
   "dependencies": {
     "body-parser": "^1.4.3",
@@ -14,13 +14,15 @@
   },
   "browserify": {
     "transform": [
-      [ "reactify", { "harmony": true } ]
+      [
+        "babelify"
+      ]
     ]
   },
   "devDependencies": {
+    "babelify": "^5.0.4",
     "jquery": "^2.1.3",
     "marked": "^0.3.3",
-    "react": "^0.13.0",
-    "reactify": "^1.0.0"
+    "react": "^0.13.0"
   }
 }
