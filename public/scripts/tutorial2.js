@@ -1,6 +1,6 @@
-var React = require('react');
-var $ = require('jquery');
-var marked = require('marked');
+import React from 'react';
+import $ from 'jquery';
+import marked from 'marked';
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
