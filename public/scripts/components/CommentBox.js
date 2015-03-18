@@ -3,7 +3,29 @@ import $ from 'jquery';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 
+var Logger = {
+  logging(str) {
+    console.log(str);
+  },
+  componentWillMount() {
+    this.logging('Log: component will mount');
+  },
+  componentDidMount() {
+    this.logging('Log: component did mount');
+  },
+  componentWillReceiveProps(nextProps) {
+    console.log('Log: component will receive props');
+  },
+  componentWillUpdate() {
+    console.log('Log: component will update');
+  },
+  componentDidUpdate() {
+    console.log('Log: component did update');
+  }
+};
+
 var CommentBox = React.createClass({
+  mixins: [Logger],
   loadCommentsFromServer() {
     $.ajax({
       url: this.props.url,
@@ -36,21 +58,9 @@ var CommentBox = React.createClass({
   getInitialState() {
     return {data: []};
   },
-  componentWillMount() {
-    console.log('Log: componentWillMount');
-  },
   componentDidMount() {
     this.loadCommentsFromServer();
     setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-  },
-  componentWillReceiveProps(nextProps) {
-    console.log('Log: componentWillReceiveProps');
-  },
-  componentWillUpdate() {
-    console.log('Log: componentWillUpdate');
-  },
-  componentDidUpdate() {
-    console.log('Log: componentDidUpdate');
   },
   render() {
     return (
